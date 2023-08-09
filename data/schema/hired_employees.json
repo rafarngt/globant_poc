@@ -1,0 +1,22 @@
+[
+    {
+       "name":"id",
+       "type":"INTEGER"
+    },
+    {
+       "name":"name",
+       "type":"STRING"
+    },
+    {
+       "name":"hire_datetime",
+       "type":"STRING"
+    },
+    {
+       "name":"department_id",
+       "type":"INTEGER"
+    },
+    {
+       "name":"job_id",
+       "type":"INTEGER"
+    }
+ ]
