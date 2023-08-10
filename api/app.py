@@ -11,7 +11,7 @@ from google.cloud import storage
 
 app = Flask(__name__)
 api = Api(app)
-
+#TODO: add as environment
 app.config['BQ_DATASET'] = 'raw'
 app.config['PROJECT_ID'] = 'poc-globant-data'
 app.config['GCS_BUCKET'] = 'invalid_records-90c6f489'
