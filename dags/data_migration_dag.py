@@ -2,8 +2,6 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
-from airflow.providers.google.cloud.transfers.bigquery_to_gcs import BigQueryToGCSOperator
-from airflow.providers.google.cloud.transfers.local_to_gcs import LocalFilesystemToGCSOperator
 from airflow.models import Variable
 from airflow.operators.dummy_operator import DummyOperator
 import ast 
@@ -13,7 +11,7 @@ def on_failure_callback(**kwargs):
     print("Task failed. Adding additional step for logging.")
 
 default_args = {
-    'owner': 'rafael_noriega',
+    'owner': 'rafael-noriega',
     'depends_on_past': False,
     'start_date': datetime(2023, 8, 1),
     'email_on_failure': False,
