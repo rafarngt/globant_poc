@@ -19,7 +19,7 @@ dag = DAG(
 
 project_id = 'poc-globant-data'
 dataset_id = 'raw'
-gcs_bucket = 'tables-backups-66b307/20230812'
+gcs_bucket = 'tables-backups-66b307/20230812' #INFO: cambiar la fecha a cargar la data
 
 tables_and_files = {
     'departments': 'departments.avro',
