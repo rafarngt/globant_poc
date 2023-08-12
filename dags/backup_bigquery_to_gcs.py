@@ -5,7 +5,7 @@ from airflow.models import Variable
 from datetime import datetime, timedelta
 
 default_args = {
-    'owner': 'tu_nombre',
+    'owner': 'rafael-noriega',
     'start_date': days_ago(1),
     'depends_on_past': False,
     'retries': 1,
@@ -33,7 +33,7 @@ for table in tables:
         gcp_conn_id="google_cloud_default",
         project_id=project_id,
         source_project_dataset_table=f"{project_id}.{dataset_id}.{table}",
-        destination_cloud_storage_uris=[f"{gcs_bucket}/{table}/{{{{ ds_nodash }}}}.avro"],
+        destination_cloud_storage_uris=[f"{gcs_bucket}/{{{{ ds_nodash }}}}/{table}.avro"],
         export_format='AVRO',
         field_delimiter=',',
         dag=dag,
