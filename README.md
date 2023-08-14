@@ -145,15 +145,58 @@ department_hires endpoint:
 
 
 ### GCP Usage
-Cloud Storage (GCS)
-BiQuery
-Cloud RUN
+#### Cloud Storage (GCS):
+As an example, it is necessary to create the following buckets: 
+- `invalid_records-90c6f489`: contains the `failed_rows` folder, in this folder an `.avro` file is created with the records that fail at the moment of being loaded in Bigquery. 
+- `raw-data-8faddca5`: contains the folder structure `year={year}` inside this `month={month}`, and inside this `day={day}`, this with the idea of reflecting a daily data migration strategy. 
+path example: 
 
+>```
+> raw-data-8faddca5/year=2023/mount=8/day=12
+>```
 
+inside this there are 3 main folders, one for each table, example: 
+> ```
+> Hired_employes/hired_employees.csv
+> Jobs/jobs.csv
+> Departments/departments.csv
+> ```
 
+- `tables-backups-66b307`: this bucket stores the different backups made by the dag `backup_bigquery_to_gcs.py`, each backup is stored in a folder with the `date` of execution, followed by the `name of the table` with extension `.avro`. 
+example: 
+> ```
+> gs://tables-backups-66b307/20230812/departments.avro
+> ```
 
+Note. if you want to replicate this you must create it with other names and make the change in the variables and environment to be used. 
 
+#### BiQuery:
 
-gcloud builds submit --tag gcr.io/poc-globant-data/flask-api
+The raw dataset must be created for the project. 
 
- gcloud run services update flask-api --update-env-vars PROJECT_ID="poc-globant-data",BQ_DATASET="raw,GCS_BUCKET=invalid_records-90c6f489"
+#### Cloud RUN (API):
+create Image to container register: 
+> ```
+> gcloud builds submit --tag gcr.io/poc-globant-data/flask-api
+> ```
+
+deploy Api with Cloud Run:
+> ```
+> gcloud run services update flask-api --update-env-vars PROJECT_ID="poc-globant-data",BQ_DATASET="raw,GCS_BUCKET=invalid_records-90c6f489"
+> ```
+
+ curls: 
+ Upload File Endpoint:
+> ```
+> curl --location 'https://flask-api-s5ubhcqi4q-ue.a.run.app/api/upload' --form 'file=@"/path/with/file/hired_employees.csv"'
+> ```
+
+Hires by Quarter Endpoint:
+> ```
+> curl --location 'https://flask-api-s5ubhcqi4q-ue.a.run.app/api/reports/hires_by_quarter/2021'
+> ```
+
+Department Hires Endpoint:
+> ```
+> curl --location 'https://flask-api-s5ubhcqi4q-ue.a.run.app/api/reports/department_hires/2021'
+> ```
