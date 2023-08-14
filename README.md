@@ -35,7 +35,6 @@ This repository is a challenge for the Data Engineer role, which uses the follow
 >|.. .gitignore
 >|.. README.md
 >```
-# Architeceture: 
 
 # Pre requeriments: 
 - [X] Have Docker and Docker Compose Installed
