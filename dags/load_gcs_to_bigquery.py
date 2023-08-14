@@ -19,7 +19,7 @@ dag = DAG(
 
 project_id = 'poc-globant-data'
 dataset_id = 'raw'
-gcs_bucket = 'tables-backups-66b307/20230812' # asignar carpeta 
+gcs_bucket = 'tables-backups-66b307/20230812'
 
 tables_and_files = {
     'departments': 'departments.avro',
