@@ -1,0 +1,7 @@
+{
+    "dataset": "raw",
+    "folders": "['hired_employees', 'departments', 'jobs']",
+    "invalid_bucket_name": "invalid_records-90c6f489",
+    "project_id": "poc-globant-data",
+    "raw_bucket_name": "raw-data-8faddca5"
+}
